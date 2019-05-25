@@ -13,6 +13,7 @@ public class Parameters : MonoBehaviour
     public static Owan owan;
     public static Chagashi chagashi;
     public static Feeling feeling;
+    public static int Mazescore;
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
