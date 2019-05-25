@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Select.unity
     guid: 1697a80be4ff4994b9f2d4233cede800
   - enabled: 1
-    path: Assets/Scenes/ochatate.unity
-    guid: 06cd0636c9176d6479b27ede5ee5e750
+    path: Assets/Scenes/Mazemaze.unity
+    guid: 2389e4dfa0bac1b4099f787080e5b4c1
+  - enabled: 1
+    path: Assets/Scenes/Douzo.unity
+    guid: 8d3f2315d92d6f040bcf5cdc27727919
+  - enabled: 1
+    path: Assets/Scenes/Jucdge.unity
+    guid: da0f7970a8a16944ea7771c9278b0c6a
   m_configObjects: {}
