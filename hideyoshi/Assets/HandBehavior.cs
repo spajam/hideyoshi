@@ -22,7 +22,7 @@ public class HandBehavior : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Vector2 vector2 = new Vector2(0, Input.GetTouch(0).position.y);
-            //transform.position = camera.GetComponent<Camera>().ScreenToWorldPoint();
+            transform.position = camera.GetComponent<Camera>().ScreenToWorldPoint();
         }
     }
 }
