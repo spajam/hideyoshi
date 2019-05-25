@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ChagukiManager : MonoBehaviour
 {
@@ -17,26 +19,39 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     AudioSource audio;
     Vector2 SumVec=Vector2.zero;
+    int favkosa;
     // Start is called before the first frame update
     void Start()
     {
-        
+        favkosa = Random.Range(3, 3);
+        kosalevel = 1;
+        Score = 0;
         //  Touch touch = Input.GetTouch(1);
-        Chawan.GetComponent<SpriteRenderer>().sprite = ChawanImage[0];
         Chaguki = ChagukiAnchor.transform;
+        Debug.Log(favkosa);
     }
-
+    [SerializeField]
+    Slider Azibar;
+    int kosalevel=1;
     // Update is called once per frame
     void Update()
     {
-        
-
+        float kosa = SumVec.magnitude;
+        if ( kosalevel * 100< kosa)
+        {
+            
+            if (kosalevel < favkosa)
+                StartCoroutine("AddScore10");
+            else 
+            StartCoroutine("NoScore");
+            kosalevel++;
+        }
+        Azibar.value = kosa;
+            
     }
     bool shakeble = true;
     public void HoldChaguki()
     {
-        if (shakeble)
-        {
             Vector3 touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 DelitaVec = touchpos - LastPos;
             SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
@@ -60,32 +75,45 @@ public class ChagukiManager : MonoBehaviour
                 Vector3 v = Vector3.Normalize(lp);
                 Chaguki.transform.localPosition = new Vector3(v.x * Chaguki_rad, v.y * Chaguki_rad);
             }
-            
-            if (((new Vector2 (touchpos.x, touchpos.y)).sqrMagnitude > 6))
+        if (shakeble)
+        {
+            if (((new Vector2(touchpos.x, touchpos.y-0.4f)).sqrMagnitude > 18))
             {//こぼれる
                 Debug.Log(LastPos);
-                /*
+
                 shakeble = false;
                 float x = touchpos.x;
                 float y = touchpos.y;
-                 StartCoroutine(breaking(Vector2 vec); */
+                StartCoroutine(breaking(touchpos));
+                StartCoroutine("NoScore");
             }
-
         }
+        
     }
 
     IEnumerator breaking(Vector2 vec) {
         
         Debug.Log("OK");
-        GameObject shibuki = Instantiate(Shibuki);
-        for (int i = 0; i < 6; i++)
+        GameObject shi = Instantiate(Shibuki, new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), 0), Quaternion.Euler(0,0,Random.Range(0,180)));
+        shi.transform.localScale = Vector3.zero;
+        shi.SetActive(true);
+        for (int i = 0; i < 12; i++)
         {
-            yield return new WaitForSeconds(0.1f);
-            shibuki.transform.localPosition = vec / (6 - i);
-            shibuki.transform.localScale=new Vector3(0.6f,0.6f,1) / (6 - i);
-            
+           
+            shi.transform.localPosition = vec / (12 - i);
+            shi.transform.localScale=new Vector3(0.6f,0.6f,1) / (12 - i);
+            yield return new WaitForSeconds(0.05f);
         }
+        yield return new WaitForSeconds(1f);
         shakeble = true;
+        Color c = shi.GetComponent<SpriteRenderer>().color;
+            for (int i = 0; i < 30; i++)
+        {
+            yield return new WaitForSeconds(0.2f);
+            c = new Color(c.r, c.g, c.b, c.a -0.01f);
+            shi.GetComponent<SpriteRenderer>().color = c;
+        }
+
     }
 
     public void Holdbegun()
@@ -103,38 +131,63 @@ public class ChagukiManager : MonoBehaviour
     }
     [SerializeField]
     GameObject ScoreText;
-    IEnumerator AddScore10() {
-        Debug.Log("Call");
-        //360-500
-      //  ScoreText=Instantiate(ScoreText,new Vector3(0, 360, 0),);
-        ScoreText.SetActive(true);
+
+
+    IEnumerator NoScore()
+    {
+        Score -= 5;
+        GameObject scoreText = Instantiate(ScoreText, new Vector3(0, 360, 0), Quaternion.identity, ScoreText.transform.parent);
+        scoreText.GetComponent<Text>().text = "Score -5p";
+        scoreText.SetActive(true);
         for (int i = 0; i < 28; i++)
         {
-            ScoreText.transform.localPosition = new Vector3(0, 360 + 5 * i, 0);
+            scoreText.transform.localPosition = new Vector3(0, 360 + 5 * i, 0);
 
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(0.4f);
-        ScoreText.SetActive(false);
+        Destroy(scoreText);
+    }
+
+    IEnumerator AddScore10() {
+        Score += 10;
+        //360-500
+        GameObject scoreText=Instantiate(ScoreText,new Vector3(0, 360, 0),Quaternion.identity, ScoreText.transform.parent);
+        scoreText.SetActive(true);
+        for (int i = 0; i < 28; i++)
+        {
+            scoreText.transform.localPosition = new Vector3(0, 360 + 5 * i, 0);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+        yield return new WaitForSeconds(0.4f);
+        Destroy(scoreText);
     }
     int Score = 0;
     public void Go() {
-        Debug.Log("Call");
-        StartCoroutine("AddScore10");
-        if (SumVec.magnitude < 400)
-            Score += (int)SumVec.magnitude /10;
-        else if (SumVec.magnitude > 1200)
-            Score += 0;
-        else if (SumVec.magnitude > 800)
-            Score += (int)(1200 - SumVec.magnitude) / 10;
-        else
-            Score += 40;
-        Debug.Log(SumVec.magnitude);
+        StartCoroutine("Nonoji");
+        
         if (SumVec.y / SumVec.x > 6)
             Score += 40;
         else
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
-        //Dama=20
-        Debug.Log(Score);
+        
+        
+    }
+
+    IEnumerator Nonoji()
+    {
+        Chaguki.GetComponent<Animator>().speed = 0.6f;
+        for (int i = 0; i < 28; i++)
+        {
+            Chaguki.transform.localPosition = Chaguki.transform.localPosition*(27-i)/27;
+            
+            yield return new WaitForSeconds(0.02f);
+            if (Chaguki.transform.localPosition == Vector3.zero)
+                break;
+        }
+        Chaguki.GetComponent<Animator>().SetTrigger("Nonoji");
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("main");
     }
 }
