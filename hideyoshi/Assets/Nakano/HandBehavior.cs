@@ -20,7 +20,9 @@ public class HandBehavior : MonoBehaviour
     private float diff;
     private Touch touch;
     private float overRange;
-    Camera camera;
+    private Camera camera;
+
+    private bool flag = false;//trueで茶碗の移動off
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +34,16 @@ public class HandBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.touchCount > 0)
+        if(Input.touchCount > 0 && flag == false)
         {
             touch = Input.GetTouch(0);
             TouchMove();
         }
     }
 
+    /// <summary>
+    /// 茶碗の移動、減点距離の加算、Finish関数の呼び出し
+    /// </summary>
     void TouchMove()
     {
         float movement = camera.ScreenToWorldPoint(touch.deltaPosition).y + 5;
@@ -49,18 +54,28 @@ public class HandBehavior : MonoBehaviour
             overRange += movement;
         }
         transform.Translate(new Vector2(0, movement));
-        if (transform.position.y > endPoint)
+        transform.position = new Vector2(0, Mathf.Clamp(transform.position.y, startPoint, endPoint));
+        if (transform.position.y >= endPoint)
         {
             Finish(overRange);
         }
     }
 
+    /// <summary>
+    /// 終了、フェードしてシーン遷移するコルーチンの呼び出し
+    /// </summary>
+    /// <param name="overRange">減点距離</param>
     void Finish(float overRange)
     {
+        flag = true;
         score -= (int)overRange * deduction;
         StartCoroutine(Transition());
     }
 
+    /// <summary>
+    /// フェードエフェクト、シーン遷移
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Transition()
     {
         SpriteRenderer curtainRenderer = curtain.GetComponent<SpriteRenderer>();
