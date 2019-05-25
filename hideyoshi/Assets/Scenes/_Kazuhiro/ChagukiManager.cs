@@ -26,7 +26,10 @@ public class ChagukiManager : MonoBehaviour
         favkosa = Random.Range(3, 3);
         kosalevel = 1;
         Score = 0;
-        //  Touch touch = Input.GetTouch(1);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(1);
+        }
         Chaguki = ChagukiAnchor.transform;
         Debug.Log(favkosa);
         DamaCrea();
@@ -62,9 +65,16 @@ public class ChagukiManager : MonoBehaviour
     bool shakeble = true;
     public void HoldChaguki()
     {
-            Vector3 touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 DelitaVec = touchpos - LastPos;
-            SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
+        Vector3 touchpos = new Vector3();
+        Vector3 DelitaVec = new Vector3();
+        if(Input.touchCount > 0)
+        {
+            touchpos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
+            DelitaVec = touchpos - LastPos;
+
+        }
+
+        SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
 
             if ((DelitaVec).sqrMagnitude > 0.05)
             {
@@ -128,7 +138,7 @@ public class ChagukiManager : MonoBehaviour
 
     public void Holdbegun()
     {
-        LastPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        LastPos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
     }
     public void Holdend() {
         audio.mute = true;
