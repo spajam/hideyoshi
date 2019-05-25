@@ -184,7 +184,7 @@ public class ChagukiManager : MonoBehaviour
         else
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
         Score=Score * 10 / (6 + favkosa);
-        Parameters.
+        //Parameters.
 
 
     }
