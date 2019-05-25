@@ -184,7 +184,7 @@ public class ChagukiManager : MonoBehaviour
         else
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
         Score=Score * 10 / (6 + favkosa);
-        //Parameters.
+        Parameters.Mazescore = Score;
 
 
     }
@@ -202,6 +202,6 @@ public class ChagukiManager : MonoBehaviour
         }
         Chaguki.GetComponent<Animator>().SetTrigger("Nonoji");
         yield return new WaitForSeconds(5f);
-       // SceneManager.LoadScene("main");
+       SceneManager.LoadScene("Douzo");
     }
 }
