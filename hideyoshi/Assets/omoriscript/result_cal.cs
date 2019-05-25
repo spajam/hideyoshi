@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class result_cal : MonoBehaviour
 {
+    enum hyouka {甲,乙,丙,丁};
     public Text point;
     public Text grade;
     // Start is called before the first frame update
