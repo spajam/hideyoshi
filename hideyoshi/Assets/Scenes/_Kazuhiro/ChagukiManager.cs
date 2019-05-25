@@ -33,9 +33,19 @@ public class ChagukiManager : MonoBehaviour
 
     }
 
+    Vector2 ReturnRad(Vector2 vec)
+    {
+        float r = vec.magnitude;
+
+        // float x = Mathf.Floor(vec.x * 10) / 10.0f;
+        //float y = Mathf.Floor(vec.y * 10) / 10.0f;
+
+        float arc = -(float)System.Math.Atan2(vec.y, vec.x);
+        return new Vector2(Mathf.Cos(arc) * r, Mathf.Sin(arc) * 2 * r);
+    }
+
     public void HoldChaguki()
     {
-       //(Input.GetTouch(0).deltaPosition / Time.deltaTime * Time.deltaTime);
         Vector3 touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 DelitaVec = touchpos - LastPos;
         if ((DelitaVec).sqrMagnitude > 0.05)
@@ -43,17 +53,17 @@ public class ChagukiManager : MonoBehaviour
         }
         else
             audio.mute = true;
-        Debug.Log(DelitaVec);
-        //Chaguki.transform.position += new Vector3(DelitaVec.x, DelitaVec.y,0);
+       
         Chaguki.Translate(new Vector3(DelitaVec.x, DelitaVec.y, 0), Space.World);
         Vector3 lp = Chaguki.transform.localPosition;
-        if (lp.x * lp.x + lp.y * lp.y / 4 > Chaguki_rad * Chaguki_rad)
+             if (lp.x * lp.x + lp.y * lp.y  > Chaguki_rad * Chaguki_rad)
         {
-            lp = Vector3.Normalize(lp) ;
 
-            Chaguki.transform.localPosition=new Vector3(lp.x * Chaguki_rad, lp.y * 2 * Chaguki_rad, 0);
+           
+           // Chaguki.transform.localPosition = new Vector3( *Chaguki_rad,  * Chaguki_rad);
         }
-           LastPos = touchpos;
+       
+        LastPos = touchpos;
     }
    
     public void Holdbegun()
