@@ -8,7 +8,7 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     Vector3 Motutoko;
-    float Chaguki_rad=1.4f;
+    float Chaguki_rad=1.9f;
     [SerializeField]
     Sprite[] ChawanImage;
     [SerializeField]
@@ -59,8 +59,8 @@ public class ChagukiManager : MonoBehaviour
              if (lp.x * lp.x + lp.y * lp.y  > Chaguki_rad * Chaguki_rad)
         {
 
-           
-           // Chaguki.transform.localPosition = new Vector3( *Chaguki_rad,  * Chaguki_rad);
+           Vector3 v= Vector3.Normalize(lp);
+           Chaguki.transform.localPosition = new Vector3( v.x*Chaguki_rad, v.y * Chaguki_rad);
         }
        
         LastPos = touchpos;
