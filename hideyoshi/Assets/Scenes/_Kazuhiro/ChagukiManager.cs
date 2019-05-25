@@ -10,7 +10,7 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     Vector3 Motutoko;
-    float Chaguki_rad=2f;
+    float Chaguki_rad=0.6f;
     [SerializeField]
     Sprite[] ChawanImage;
     [SerializeField]
@@ -34,7 +34,7 @@ public class ChagukiManager : MonoBehaviour
     }
 
     void DamaCrea() {
-        float r = Random.Range(1, Chaguki_rad-0.2f);
+        float r = Random.Range(0.4f, Chaguki_rad-0.2f);
         float d = Random.Range(0, 2 * Mathf.PI);
         GameObject dama = Instantiate(Dama, new Vector3(r*Mathf.Cos(d), r * Mathf.Sin(d), 0), Quaternion.Euler(0, 0, Random.Range(-10, 10)));
         dama.SetActive(true);
