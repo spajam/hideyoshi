@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Select : MonoBehaviour
 {
-    [SerializeField] private RectTransform window;
+    [SerializeField] private RectTransform owan;
+    [SerializeField] private RectTransform chagashi;
+
+    private RectTransform window;
     public int page;
     private Vector3 before;
     private Vector3 after;
-    float t;
-    int max;
+    private float t;
+    private int max;
 
     private void Start()
     {
         page = 0;
         t = 0;
-        max = 2;
+        max = 1;
         before = Vector3.up * 360f;
         after = Vector3.up * 360f;
+        window = owan;
+        window.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -44,6 +48,18 @@ public class Select : MonoBehaviour
     public void ToMazemaze()
     {
         SceneManager.LoadSceneAsync("Mazemaze");
-        Parameters.owan = page;
+        Parameters.owan = (Owan)page;
+    }
+
+    public void ModeSelect(GameObject mode)
+    {
+        window.gameObject.SetActive(false);
+        window = mode.GetComponent<RectTransform>();
+        window.gameObject.SetActive(true);
+        switch (mode.name)
+        {
+            case "owanSelect":max = 1;break;
+            case "wagashiSelect":max = 2;break;
+        }
     }
 }
