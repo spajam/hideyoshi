@@ -12,12 +12,14 @@ public class Select : MonoBehaviour
     private Vector3 after;
     private float t;
     private int max;
+    private int order;
 
     private void Start()
     {
         page = 0;
         t = 0;
         max = 1;
+        order = 0;
         before = Vector3.up * 360f;
         after = Vector3.up * 360f;
         window = owan;
@@ -48,7 +50,16 @@ public class Select : MonoBehaviour
     public void ToMazemaze()
     {
         SceneManager.LoadSceneAsync("Mazemaze");
-        Parameters.owan = (Owan)page;
+        switch (window.gameObject.name)
+        {
+            case "owanSelect":
+                Parameters.owan = (Owan)page;
+                break;
+            case "wagashiSelect":
+                Parameters.chagashi = (Chagashi)page;
+                break;
+        }
+
     }
 
     public void ModeSelect(GameObject mode)
@@ -58,8 +69,17 @@ public class Select : MonoBehaviour
         window.gameObject.SetActive(true);
         switch (mode.name)
         {
-            case "owanSelect":max = 1;break;
-            case "wagashiSelect":max = 2;break;
+            case "owanSelect":
+                max = 1;
+                Parameters.owan = (Owan)page;
+                break;
+            case "wagashiSelect":
+                max = 2;
+                Parameters.chagashi = (Chagashi)page;
+                break;
         }
+        page = 0;
+        before = Vector3.up * 360f;
+        after = Vector3.up * 360f;
     }
 }

@@ -8,10 +8,12 @@
 
 public enum Owan { };
 public enum Feeling { };
+public enum Chagashi { };
 public class Parameters : MonoBehaviour
 {
     public static Owan owan;
     public static Feeling feeling;
+    public static Chagashi chagashi;
 
     private void Awake()
     {
