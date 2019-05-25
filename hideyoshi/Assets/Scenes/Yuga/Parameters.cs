@@ -6,7 +6,7 @@
 /// </summary>
 public class Parameters : MonoBehaviour
 {
-    public static int owan;
+    public static int owan,feelings,maze;
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
