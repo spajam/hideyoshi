@@ -10,11 +10,11 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     Vector3 Motutoko;
-    float Chaguki_rad=1.9f;
+    float Chaguki_rad=2f;
     [SerializeField]
     Sprite[] ChawanImage;
     [SerializeField]
-    GameObject Chawan,ChagukiAnchor,Shibuki;
+    GameObject Chawan,ChagukiAnchor,Shibuki,Dama;
     Transform Chaguki;
     [SerializeField]
     AudioSource audio;
@@ -29,7 +29,17 @@ public class ChagukiManager : MonoBehaviour
         //  Touch touch = Input.GetTouch(1);
         Chaguki = ChagukiAnchor.transform;
         Debug.Log(favkosa);
+        DamaCrea();
+        DamaCrea();
     }
+
+    void DamaCrea() {
+        float r = Random.Range(1, Chaguki_rad-0.2f);
+        float d = Random.Range(0, 2 * Mathf.PI);
+        GameObject dama = Instantiate(Dama, new Vector3(r*Mathf.Cos(d), r * Mathf.Sin(d), 0), Quaternion.Euler(0, 0, Random.Range(-10, 10)));
+        dama.SetActive(true);
+    }
+
     [SerializeField]
     Slider Azibar;
     int kosalevel=1;
@@ -40,7 +50,7 @@ public class ChagukiManager : MonoBehaviour
         if ( kosalevel * 100< kosa)
         {
             
-            if (kosalevel < favkosa)
+            if (kosalevel < favkosa+1)
                 StartCoroutine("AddScore10");
             else 
             StartCoroutine("NoScore");
@@ -127,7 +137,8 @@ public class ChagukiManager : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         col.gameObject.SetActive(false);
-        
+        StartCoroutine("AddScore10");
+
     }
     [SerializeField]
     GameObject ScoreText;
@@ -167,12 +178,15 @@ public class ChagukiManager : MonoBehaviour
     public void Go() {
         StartCoroutine("Nonoji");
         
+        
         if (SumVec.y / SumVec.x > 6)
             Score += 40;
         else
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
-        
-        
+        Score=Score * 10 / (6 + favkosa);
+        //Parameters.
+
+
     }
 
     IEnumerator Nonoji()
