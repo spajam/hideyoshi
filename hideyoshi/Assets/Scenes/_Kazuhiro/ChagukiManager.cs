@@ -8,21 +8,22 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     Vector3 Motutoko;
-    float Chaguki_rad=2f;
+    float Chaguki_rad=4f;
     [SerializeField]
     Sprite[] ChawanImage;
     [SerializeField]
     GameObject Chawan,ChagukiAnchor;
     Transform Chaguki;
     [SerializeField]
-    AudioClip Shake;
+    AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
-       
-      //  Touch touch = Input.GetTouch(1);
+        
+        //  Touch touch = Input.GetTouch(1);
         Chawan.GetComponent<SpriteRenderer>().sprite = ChawanImage[0];
-        Chaguki = ChagukiAnchor.transform.parent;
+        Chaguki = ChagukiAnchor.transform;
     }
 
     // Update is called once per frame
@@ -32,11 +33,27 @@ public class ChagukiManager : MonoBehaviour
 
     }
 
-    public void HoldChaguki() {
-        Debug.Log(_camera.ScreenToWorldPoint(Input.mousePosition));
+    public void HoldChaguki()
+    {
+       //(Input.GetTouch(0).deltaPosition / Time.deltaTime * Time.deltaTime);
         Vector3 touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 deltaPos = LastPos - touchpos;
-        Chaguki.transform.position = new Vector3(touchpos.x, touchpos.y,0);
-        LastPos = touchpos;
+        Vector3 DelitaVec = touchpos - LastPos;
+        if ((DelitaVec).sqrMagnitude > 0.05)
+        { audio.mute = false;
+        }
+        else
+            audio.mute = true;
+        Debug.Log(DelitaVec);
+        Chaguki.transform.position += new Vector3(DelitaVec.x, DelitaVec.y,0);
+        
+       LastPos = touchpos;
+    }
+   
+    public void Holdbegun()
+    {
+        LastPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+    }
+    public void Holdend() {
+        audio.mute = true;
     }
 }
