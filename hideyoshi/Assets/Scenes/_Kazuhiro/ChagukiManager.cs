@@ -48,7 +48,7 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Slider Azibar;
     int kosalevel=1;
-    int Machacolor = 1;
+    int Machacolor = 0;
     // Update is called once per frame
     void Update()
     {
@@ -68,7 +68,7 @@ public class ChagukiManager : MonoBehaviour
         if (kosa < 400)
         {
             Color c = Macha[Machacolor].color;
-            Macha[Machacolor].color = new Color(c.r, c.g, c.b, 255 * (200 - (kosa % 200)));
+            Macha[Machacolor].color = new Color(c.r, c.g, c.b, 255/ (200-kosa % 200));
         }
     }
     bool shakeble = true;
