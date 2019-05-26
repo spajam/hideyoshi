@@ -12,7 +12,7 @@ public class result_cal : MonoBehaviour
     void Start()
     {
 
-        point = GetComponent<Text>();
+        point = GameObject.Find("point").GetComponent<Text>();
         grade = GetComponent<Text>();
         float result = Math.Abs(cal()*1000);
 
