@@ -11,14 +11,15 @@ public class ChagukiManager : MonoBehaviour
     Camera _camera;
     Vector3 Motutoko;
     float Chaguki_rad=0.6f;
-    [SerializeField]
-    Sprite[] ChawanImage;
+   
     [SerializeField]
     GameObject Chawan,ChagukiAnchor,Shibuki,Dama;
     Transform Chaguki;
     [SerializeField]
     AudioSource audio;
     Vector2 SumVec=Vector2.zero;
+    [SerializeField]
+    Sprite[] Macha;
     int favkosa;
     // Start is called before the first frame update
     void Start()
