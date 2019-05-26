@@ -19,12 +19,13 @@ public class ChagukiManager : MonoBehaviour
     AudioSource audio;
     Vector2 SumVec=Vector2.zero;
     [SerializeField]
-    Sprite[] Macha;
+    SpriteRenderer[] Macha;
     int favkosa;
     // Start is called before the first frame update
     void Start()
     {
-        favkosa = Random.Range(3, 3);
+        Machacolor = 0;
+           favkosa = Random.Range(3, 3);
         kosalevel = 1;
         Score = 0;
         if (Input.touchCount > 0)
@@ -47,6 +48,7 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Slider Azibar;
     int kosalevel=1;
+    int Machacolor = 1;
     // Update is called once per frame
     void Update()
     {
@@ -58,21 +60,30 @@ public class ChagukiManager : MonoBehaviour
                 StartCoroutine("AddScore10");
             else 
             StartCoroutine("NoScore");
+            if (kosalevel == 2)
+                Machacolor++;
             kosalevel++;
         }
         Azibar.value = kosa;
-            
+        if (kosa < 400)
+        {
+            Color c = Macha[Machacolor].color;
+            Macha[Machacolor].color = new Color(c.r, c.g, c.b, 255 * (200 - (kosa % 200)));
+        }
     }
     bool shakeble = true;
     public void HoldChaguki()
     {
         Vector3 touchpos = new Vector3();
         Vector3 DelitaVec = new Vector3();
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
         {
             touchpos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
             DelitaVec = touchpos - LastPos;
 
+        }
+        else { touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            DelitaVec = touchpos - LastPos;
         }
 
         SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
