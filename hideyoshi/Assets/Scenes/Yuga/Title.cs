@@ -8,7 +8,7 @@ public class Title : MonoBehaviour
     [SerializeField] private Text comment;
     [SerializeField] private string[] selives;
     [SerializeField] private Animator titleAnim;
-    
+
     private void SetFeeling()
     {
         int num = Random.Range(0, 3);
