@@ -53,10 +53,10 @@ public class Select : MonoBehaviour
         switch (window.gameObject.name)
         {
             case "owanSelect":
-                Parameters.owan = (Owan)page;
+                Parameters.owan = page;
                 break;
             case "wagashiSelect":
-                Parameters.chagashi = (Chagashi)page;
+                Parameters.chagashi = page;
                 break;
         }
 
@@ -71,11 +71,11 @@ public class Select : MonoBehaviour
         {
             case "owanSelect":
                 max = 1;
-                Parameters.owan = (Owan)page;
+                Parameters.owan = page;
                 break;
             case "wagashiSelect":
                 max = 2;
-                Parameters.chagashi = (Chagashi)page;
+                Parameters.chagashi = page;
                 break;
         }
         page = 0;

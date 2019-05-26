@@ -138,7 +138,11 @@ public class ChagukiManager : MonoBehaviour
 
     public void Holdbegun()
     {
-        LastPos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
+        if (Input.touchCount > 0)
+        {
+            LastPos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+        }
     }
     public void Holdend() {
         audio.mute = true;
