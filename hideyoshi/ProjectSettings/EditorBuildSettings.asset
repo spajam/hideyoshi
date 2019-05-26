@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Title.unity
+  - enabled: 1
+    path: Assets/Scenes/OP.unity
     guid: 0717766d5f417624bbc748f5ce9c350e
   - enabled: 1
-    path: Assets/Scenes/Select.unity
+    path: Assets/Scenes/choose.unity
     guid: 1697a80be4ff4994b9f2d4233cede800
   - enabled: 0
-    path: Assets/Scenes/ochatate.unity
-    guid: 06cd0636c9176d6479b27ede5ee5e750
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Mazemaze.unity
     guid: 2389e4dfa0bac1b4099f787080e5b4c1
