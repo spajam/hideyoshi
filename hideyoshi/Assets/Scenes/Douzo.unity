@@ -338,9 +338,9 @@ MonoBehaviour:
   curtain: {fileID: 572216705}
   startPoint: -1.5
   endPoint: 2.2
-  limitVel: 0
+  limitVel: 5
   currentVel: 0
-  deduction: 0
+  deduction: 1
   testc: 0
 --- !u!212 &489625425
 SpriteRenderer:

@@ -69,8 +69,8 @@ public class HandBehavior : MonoBehaviour
     {
         flag = true;
         score = (int)(score / (overRange * deduction));
-        Parameters.douzo = overRange * deduction;
-        Debug.Log(" O: " + overRange * deduction);
+        Parameters.douzo = Mathf.Clamp(overRange * deduction, 1.0f, 4.0f);
+        Debug.Log(" O: " + Parameters.douzo);
         StartCoroutine(Transition());
     }
 
