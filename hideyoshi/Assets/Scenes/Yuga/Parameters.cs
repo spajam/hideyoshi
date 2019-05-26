@@ -5,7 +5,6 @@
 /// シーン間の変数
 /// </summary>
 /// 
-
 public class Parameters : MonoBehaviour
 {
     public static int owan;

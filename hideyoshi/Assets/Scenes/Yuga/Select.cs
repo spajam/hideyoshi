@@ -12,14 +12,15 @@ public class Select : MonoBehaviour
     private Vector3 after;
     private float t;
     private int max;
-    private int order;
+
+    private bool hint;
 
     private void Start()
     {
         page = 0;
         t = 0;
         max = 1;
-        order = 0;
+        hint = false;
         before = Vector3.up * 360f;
         after = Vector3.up * 360f;
         window = owan;
@@ -53,10 +54,10 @@ public class Select : MonoBehaviour
         switch (window.gameObject.name)
         {
             case "owanSelect":
-                Parameters.owan = (Owan)page;
+                Parameters.owan = page;
                 break;
             case "wagashiSelect":
-                Parameters.chagashi = (Chagashi)page;
+                Parameters.chagashi = page;
                 break;
         }
 
@@ -71,15 +72,27 @@ public class Select : MonoBehaviour
         {
             case "owanSelect":
                 max = 1;
-                Parameters.owan = (Owan)page;
+                Parameters.owan = page;
                 break;
             case "wagashiSelect":
                 max = 2;
-                Parameters.chagashi = (Chagashi)page;
+                Parameters.chagashi = page;
                 break;
         }
         page = 0;
         before = Vector3.up * 360f;
         after = Vector3.up * 360f;
+    }
+
+    public void HintDispplay()
+    {
+        if (hint)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
