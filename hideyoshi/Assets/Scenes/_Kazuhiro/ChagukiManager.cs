@@ -10,7 +10,7 @@ public class ChagukiManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     Vector3 Motutoko;
-    float Chaguki_rad=2f;
+    float Chaguki_rad=0.6f;
     [SerializeField]
     Sprite[] ChawanImage;
     [SerializeField]
@@ -26,7 +26,10 @@ public class ChagukiManager : MonoBehaviour
         favkosa = Random.Range(3, 3);
         kosalevel = 1;
         Score = 0;
-        //  Touch touch = Input.GetTouch(1);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(1);
+        }
         Chaguki = ChagukiAnchor.transform;
         Debug.Log(favkosa);
         DamaCrea();
@@ -34,7 +37,7 @@ public class ChagukiManager : MonoBehaviour
     }
 
     void DamaCrea() {
-        float r = Random.Range(1, Chaguki_rad-0.2f);
+        float r = Random.Range(0.4f, Chaguki_rad-0.2f);
         float d = Random.Range(0, 2 * Mathf.PI);
         GameObject dama = Instantiate(Dama, new Vector3(r*Mathf.Cos(d), r * Mathf.Sin(d), 0), Quaternion.Euler(0, 0, Random.Range(-10, 10)));
         dama.SetActive(true);
@@ -62,9 +65,16 @@ public class ChagukiManager : MonoBehaviour
     bool shakeble = true;
     public void HoldChaguki()
     {
-            Vector3 touchpos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 DelitaVec = touchpos - LastPos;
-            SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
+        Vector3 touchpos = new Vector3();
+        Vector3 DelitaVec = new Vector3();
+        if(Input.touchCount > 0)
+        {
+            touchpos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
+            DelitaVec = touchpos - LastPos;
+
+        }
+
+        SumVec += new Vector2(Mathf.Abs(DelitaVec.x), Mathf.Abs(DelitaVec.y));
 
             if ((DelitaVec).sqrMagnitude > 0.05)
             {
@@ -128,7 +138,7 @@ public class ChagukiManager : MonoBehaviour
 
     public void Holdbegun()
     {
-        LastPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        LastPos = _camera.ScreenToWorldPoint(Input.GetTouch(0).position);
     }
     public void Holdend() {
         audio.mute = true;
@@ -184,6 +194,7 @@ public class ChagukiManager : MonoBehaviour
         else
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
         Score=Score * 10 / (6 + favkosa);
+
         Parameters.Mazescore = Score;
 
 

@@ -7,13 +7,6 @@ public class toTitle : MonoBehaviour
 {
     public void Ontouch()
     {
-        if(Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Began)
-            {
-                SceneManager.LoadScene("Title");
-            }
-        }
+        SceneManager.LoadScene("Select");
     }
 }
