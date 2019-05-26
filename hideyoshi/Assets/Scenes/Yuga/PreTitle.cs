@@ -6,6 +6,6 @@ public class PreTitle : MonoBehaviour
 {
     public void ToTitle()
     {
-        SceneManager.LoadSceneAsync("Select");
+        SceneManager.LoadSceneAsync("choose");
     }
 }
