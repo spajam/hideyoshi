@@ -151,14 +151,14 @@ public class ChagukiManager : MonoBehaviour
 
     }
     [SerializeField]
-    GameObject ScoreText;
+    GameObject ScoreText, ScoreText2;
 
 
     IEnumerator NoScore()
     {
         Score -= 5;
-        GameObject scoreText = Instantiate(ScoreText, new Vector3(0, 360, 0), Quaternion.identity, ScoreText.transform.parent);
-        scoreText.GetComponent<Text>().text = "Score -5p";
+        GameObject scoreText = Instantiate(ScoreText2, new Vector3(0, 360, 0), Quaternion.identity, ScoreText2.transform.parent);
+        
         scoreText.SetActive(true);
         for (int i = 0; i < 28; i++)
         {
@@ -186,6 +186,7 @@ public class ChagukiManager : MonoBehaviour
     }
     int Score = 0;
     public void Go() {
+       
         StartCoroutine("Nonoji");
         
         
