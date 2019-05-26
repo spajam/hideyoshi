@@ -86,7 +86,7 @@ public class HandBehavior : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        SceneManager.LoadScene("Judge");
+        SceneManager.LoadScene("Jucdge");
         yield break;
     }
 }
