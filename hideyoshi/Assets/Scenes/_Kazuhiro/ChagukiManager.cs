@@ -213,7 +213,15 @@ public class ChagukiManager : MonoBehaviour
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
         Score=Score * 10 / (6 + favkosa);
 
-        Parameters.Mazescore = Score;
+        if (Score < 0)
+        {
+            Parameters.Mazescore = 0;
+        }
+        else
+        {
+            Parameters.Mazescore = -Score;
+        }
+        Debug.Log("maze:" + Parameters.Mazescore);
 
 
     }
