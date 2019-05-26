@@ -19,7 +19,7 @@ public class HandBehavior : MonoBehaviour
 
     private float diff;
     private Touch touch;
-    private float overRange;
+    private float overRange = 1;
     private Camera camera;
 
     private bool flag = false;//trueで茶碗の移動off
@@ -68,7 +68,8 @@ public class HandBehavior : MonoBehaviour
     void Finish(float overRange)
     {
         flag = true;
-        score -= (int)overRange * deduction;
+        score = (int)(score / (overRange * deduction));
+        Parameters.douzo = overRange * deduction;
         StartCoroutine(Transition());
     }
 
