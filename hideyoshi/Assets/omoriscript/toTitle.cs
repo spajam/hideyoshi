@@ -7,6 +7,6 @@ public class toTitle : MonoBehaviour
 {
     public void Ontouch()
     {
-        SceneManager.LoadScene("Select");
+        SceneManager.LoadScene("choose");
     }
 }
