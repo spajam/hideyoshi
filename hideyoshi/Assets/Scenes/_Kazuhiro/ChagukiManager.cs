@@ -39,7 +39,7 @@ public class ChagukiManager : MonoBehaviour
     }
 
     void DamaCrea() {
-        float r = Random.Range(0.4f, Chaguki_rad-0.2f);
+        float r = Random.Range(1.6f, Chaguki_rad+1f);
         float d = Random.Range(0, 2 * Mathf.PI);
         GameObject dama = Instantiate(Dama, new Vector3(r*Mathf.Cos(d), r * Mathf.Sin(d), 0), Quaternion.Euler(0, 0, Random.Range(-10, 10)));
         dama.SetActive(true);
@@ -213,7 +213,15 @@ public class ChagukiManager : MonoBehaviour
             Score += (int)(40 * SumVec.y /( SumVec.x*6));
         Score=Score * 10 / (6 + favkosa);
 
-        Parameters.Mazescore = Score;
+        if (Score < 0)
+        {
+            Parameters.Mazescore = 0;
+        }
+        else
+        {
+            Parameters.Mazescore = -Score;
+        }
+        Debug.Log("maze:" + Parameters.Mazescore);
 
 
     }
