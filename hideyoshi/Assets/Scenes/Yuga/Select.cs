@@ -13,14 +13,12 @@ public class Select : MonoBehaviour
     private Vector3 after;
     private float t;
     private int max;
-    private int order;
 
     private void Start()
     {
         page = 0;
         t = 0;
         max = 1;
-        order = 0;
         before = Vector3.up * 300f;
         after = Vector3.up * 300f;
         window = owan;
