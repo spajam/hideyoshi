@@ -5,6 +5,7 @@ public class Select : MonoBehaviour
 {
     [SerializeField] private RectTransform owan;
     [SerializeField] private RectTransform chagashi;
+    [SerializeField] private RectTransform selected;
 
     private RectTransform window;
     public int page;
@@ -12,17 +13,16 @@ public class Select : MonoBehaviour
     private Vector3 after;
     private float t;
     private int max;
-
-    private bool hint;
+    private int order;
 
     private void Start()
     {
         page = 0;
         t = 0;
         max = 1;
-        hint = false;
-        before = Vector3.up * 360f;
-        after = Vector3.up * 360f;
+        order = 0;
+        before = Vector3.up * 300f;
+        after = Vector3.up * 300f;
         window = owan;
         window.gameObject.SetActive(true);
     }
@@ -45,7 +45,12 @@ public class Select : MonoBehaviour
             page--;
         }
         before = window.position;
-        after = new Vector3(-720f * page, 360f, 0);
+        after = new Vector3(-720f * page, 300f, 0);
+    }
+
+    public void SelectedTransform(float x)
+    {
+        selected.anchoredPosition = new Vector2(x, 600f);
     }
 
     public void ToMazemaze()
@@ -80,19 +85,7 @@ public class Select : MonoBehaviour
                 break;
         }
         page = 0;
-        before = Vector3.up * 360f;
-        after = Vector3.up * 360f;
-    }
-
-    public void HintDispplay()
-    {
-        if (hint)
-        {
-
-        }
-        else
-        {
-
-        }
+        before = Vector3.up * 300f;
+        after = Vector3.up * 300f;
     }
 }
