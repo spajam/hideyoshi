@@ -14,9 +14,16 @@ public class result_cal : MonoBehaviour
 
         point = GameObject.Find("point").GetComponent<Text>();
         grade = GetComponent<Text>();
-        float result = Math.Abs(cal()*1000);
+        float result = cal()*1000;
 
-        point.text = result.ToString();
+        if (result < 0)
+        {
+            point.text = "0";
+        }
+        else
+        {
+            point.text = result.ToString();
+        }
     }
     public float cal()
     {
