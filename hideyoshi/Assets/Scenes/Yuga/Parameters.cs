@@ -15,6 +15,9 @@ public class Parameters : MonoBehaviour
     public static float douzo;
     private void Awake()
     {
+        //selectの都合上owan,chagashi未選択を-1にする。
+        owan = -1;
+        chagashi = -1;
         DontDestroyOnLoad(this.gameObject);
     }
 
