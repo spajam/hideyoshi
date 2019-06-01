@@ -14,30 +14,26 @@ public class result_cal : MonoBehaviour
 
         point = GameObject.Find("point").GetComponent<Text>();
         grade = GetComponent<Text>();
-        float result = cal()*1000;
+        float result = cal();
 
-        if (result < 0)
-        {
-            point.text = "0";
-        }
-        else
-        {
-            point.text = result.ToString();
-        }
+        point.text = result.ToString();
+
     }
     public float cal()
     {
-        float m, a, x, h, b, r, c, s, o;
+        float m, a, ch, x, h, b, r, c, s, o;
         m = Parameters.Mazescore;
         a = Parameters.owan;
+        ch = Parameters.chagashi;
         x = Parameters.charaPersonality;
         h = Parameters.charaHealth;
         b = Parameters.charaFeeling;
         o = Parameters.douzo;
-        s = (float)Math.Exp((-1) * (Math.Pow(x - a, 2)) / (Math.Pow(h, 2)));
+        s = (float)Math.Exp((-1) * (Math.Pow(x - ch, 2)) / (Math.Pow(h, 2)));
         c = (float)Math.Exp((-1) * (Math.Pow(x - a, 2)) / (Math.Pow(b, 2)));
-        r = (c + s - m) / o;
-        Debug.Log("Cup:" + c + ", Sweet:" + s + ", x:" + x + ", a:" + a + ", h:" + h + ", b:" + b + ", m:" + m + ", o:" + o);
+        r = Mathf.Max(0, m * (s + c)) / o;
+        r *= 100;
+        Debug.Log("Cup:" + c + ", Sweet:" + s + ", x:" + x + ", a:" + a + ", ch:" + ch +", h:" + h + ", b:" + b + ", m:" + m + ", o:" + o);
         return r;
     }
 }

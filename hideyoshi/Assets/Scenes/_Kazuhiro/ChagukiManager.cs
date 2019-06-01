@@ -32,7 +32,7 @@ public class ChagukiManager : MonoBehaviour
             Touch touch = Input.GetTouch(1);
         }
         Chaguki = ChagukiAnchor.transform;
-        Debug.Log(favkosa);
+        //Debug.Log(favkosa);
         DamaCrea();
         DamaCrea();
     }
@@ -88,7 +88,7 @@ public class ChagukiManager : MonoBehaviour
             Vector3 lp = Chaguki.transform.localPosition;
 
             LastPos = touchpos;
-            Debug.Log(SumVec.y / SumVec.x);
+            //Debug.Log(SumVec.y / SumVec.x);
 
             if (lp.sqrMagnitude > Chaguki_rad * Chaguki_rad)
             {
@@ -100,7 +100,8 @@ public class ChagukiManager : MonoBehaviour
         {
             if (((new Vector2(touchpos.x, touchpos.y-0.4f)).sqrMagnitude > 18))
             {//こぼれる
-                Debug.Log(LastPos);
+                
+                //Debug.Log(LastPos);
 
                 shakeble = false;
                 float x = touchpos.x;
@@ -114,7 +115,7 @@ public class ChagukiManager : MonoBehaviour
 
     IEnumerator breaking(Vector2 vec) {
         
-        Debug.Log("OK");
+        //Debug.Log("OK");
         GameObject shi = Instantiate(Shibuki, new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), 0), Quaternion.Euler(0,0,Random.Range(0,180)));
         shi.transform.localScale = Vector3.zero;
         shi.SetActive(true);

@@ -14,8 +14,14 @@ public class Select : MonoBehaviour
     private float t;
     private int max;
 
+    private int cur_owan;
+    private int cur_chagashi;
+
     private void Start()
     {
+        cur_owan = 0;
+        cur_chagashi = 0;
+
         page = 0;
         t = 0;
         max = 1;
@@ -33,6 +39,7 @@ public class Select : MonoBehaviour
 
     public void Slide(int next)
     {
+        //修正予定
         t = 0;
         if(page < max && next == 1)
         {
@@ -53,16 +60,22 @@ public class Select : MonoBehaviour
 
     public void ToMazemaze()
     {
+        Parameters.owan = cur_owan;
+        Parameters.chagashi = cur_chagashi;
         SceneManager.LoadSceneAsync("Mazemaze");
-        switch (window.gameObject.name)
-        {
-            case "owanSelect":
-                Parameters.owan = page;
-                break;
-            case "wagashiSelect":
-                Parameters.chagashi = page;
-                break;
-        }
+        //switch (window.gameObject.name)
+        //{
+        //    case "owanSelect":
+        //        //逆??
+        //        Parameters.owan = Parameters.owans[page];
+        //        Debug.Log("お椀に代入 = " + Parameters.owan);
+        //        break;
+        //    case "wagashiSelect":
+        //        //逆??
+        //        Parameters.chagashi = Parameters.chagashis[page];
+        //        Debug.Log("茶菓子に代入 = " + Parameters.chagashi);
+        //        break;
+        //}
 
     }
 
@@ -75,11 +88,13 @@ public class Select : MonoBehaviour
         {
             case "owanSelect":
                 max = 1;
-                Parameters.owan = page;
+                Parameters.chagashi = cur_chagashi;
+                Debug.Log("茶菓子に代入 = " + Parameters.chagashi);
                 break;
             case "wagashiSelect":
                 max = 2;
-                Parameters.chagashi = page;
+                Parameters.owan = cur_owan;
+                Debug.Log("お椀選択 = " );
                 break;
         }
         page = 0;
