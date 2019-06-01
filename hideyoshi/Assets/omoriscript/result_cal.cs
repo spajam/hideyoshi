@@ -37,6 +37,7 @@ public class result_cal : MonoBehaviour
         s = (float)Math.Exp((-1) * (Math.Pow(x - a, 2)) / (Math.Pow(h, 2)));
         c = (float)Math.Exp((-1) * (Math.Pow(x - a, 2)) / (Math.Pow(b, 2)));
         r = (c + s - m) / o;
+        Debug.Log("Cup:" + c + ", Sweet:" + s + ", x:" + x + ", a:" + a + ", h:" + h + ", b:" + b + ", m:" + m + ", o:" + o);
         return r;
     }
 }
